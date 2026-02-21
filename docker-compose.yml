@@ -18,6 +18,11 @@ services:
       - MODEL_STAGE=Production
     depends_on:
       - mlflow
-
+  training:
+    build: ./services/training
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+    depends_on:
+      - mlflow
 volumes:
   mlflow_data:
