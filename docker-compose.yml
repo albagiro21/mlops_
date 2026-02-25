@@ -14,21 +14,26 @@ services:
       - "${API_PORT}:8000"
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
-      - MODEL_NAME=demo-model
-      - MODEL_STAGE=Production
+      - MODEL_NAME=churn_logistic_champion
+      - MODEL_STAGE=latest
+      - ARTIFACTS_DIR=/app/artifacts/logistic
     depends_on:
       - mlflow
     volumes:
-      - mlflow_data:/mlflow   
+      - mlflow_data:/mlflow
+      - ./mlops-repo/artifacts:/app/artifacts:ro
 
   training:
     build: ./services/training
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - ARTIFACTS_DIR=/app/artifacts/logistic
+      - MODEL_NAME=churn_logistic_champion
     depends_on:
       - mlflow
     volumes:
-      - mlflow_data:/mlflow   
+      - mlflow_data:/mlflow
+      - ./mlops-repo/artifacts:/app/artifacts:ro
 
 volumes:
   mlflow_data:

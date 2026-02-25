@@ -1,9 +1,11 @@
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel
+from typing import Dict, Any
 
 class PredictRequest(BaseModel):
-    # Diabetes dataset = 10 features
-    features: List[float] = Field(..., min_length=10, max_length=10)
+    data: Dict[str, Any]
 
 class PredictResponse(BaseModel):
-    prediction: float
+    proba_churn: float
+    churn_pred: int
+    threshold: float
+    model_name: str
