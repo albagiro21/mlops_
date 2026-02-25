@@ -41,6 +41,12 @@ mlops-starter/
 │
 ├── docker-compose.yml
 ├── .env
+├── mlops-repo
+│   ├── artifacts/
+│        ├── logistics/
+│              └── logistic_pipeline.joblib
+│              ├── squemas.json
+│              ├── treshold.json
 ├── services/
 │   ├── mlflow/
 │   │   └── Dockerfile
